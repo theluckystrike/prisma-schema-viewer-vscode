@@ -1,0 +1,74 @@
+// Sample Prisma schema for Prisma Schema & ERD Inspector
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://app:devpass@localhost:5432/saas_dev"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions", "metrics"]
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  VOID
+}
+
+model Organization {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  createdAt DateTime  @default(now())
+  members   User[]
+  projects  Project[]
+  invoices  Invoice[]
+}
+
+model User {
+  id             String       @id @default(cuid())
+  email          String       @unique
+  fullName       String
+  role           Role         @default(MEMBER)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+}
+
+model Project {
+  id             String       @id @default(cuid())
+  key            String
+  title          String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime     @default(now())
+
+  @@unique([organizationId, key])
+  @@index([organizationId])
+}
+
+model Invoice {
+  id             String        @id @default(cuid())
+  amountCents    Int
+  status         InvoiceStatus @default(DRAFT)
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  issuedAt       DateTime      @default(now())
+
+  @@index([status])
+}
+
+model AuditLog {
+  actorId   String
+  action    String
+  payload   Json
+  createdAt DateTime @default(now())
+}

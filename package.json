@@ -1,0 +1,314 @@
+{
+  "name": "zovo-prisma-schema-viewer",
+  "displayName": "Prisma Schema & ERD Inspector",
+  "description": "Inspect schema.prisma and *.prisma files in VS Code offline: datasource, generator, model and enum explorer, visual model-relationship table, index and unique constraint viewer, and static schema findings without Prisma CLI or database connections.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#0F172A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/prisma-schema-viewer-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/prisma-schema-viewer-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/prisma-schema-viewer-vscode#readme",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "prisma",
+    "schema.prisma",
+    "erd",
+    "database",
+    "orm",
+    "schema",
+    "postgres",
+    "inspector"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onUri",
+    "onCustomEditor:zovo-prismaview.viewer"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "zovo-prismaview.viewer",
+        "displayName": "Prisma Schema & ERD Inspector",
+        "selector": [
+          {
+            "filenamePattern": "schema.prisma"
+          },
+          {
+            "filenamePattern": "*.prisma"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "zovoPrismaview.openWith",
+        "title": "Open in Prisma Schema & ERD Inspector",
+        "category": "Prisma Schema & ERD Inspector",
+        "icon": "$(symbol-structure)"
+      },
+      {
+        "command": "zovoPrismaview.openSample",
+        "title": "Open the Sample Prisma Schema File",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.openWalkthrough",
+        "title": "Get Started",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.moreViewers",
+        "title": "More free tools by Zovo",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.supportDeveloper",
+        "title": "Support the developer",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.auditSchema",
+        "title": "Audit Prisma schema and relations (Pro, 1 free try)",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.diffSchemas",
+        "title": "Compare two Prisma schemas (Pro, 1 free try)",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.exportErdDoc",
+        "title": "Export Mermaid ERD and dictionary (Pro, 1 free try)",
+        "category": "Prisma Schema & ERD Inspector"
+      },
+      {
+        "command": "zovoPrismaview.zovoPro.auditSchema",
+        "title": "Zovo Pro: Audit Prisma schema and relations"
+      },
+      {
+        "command": "zovoPrismaview.zovoPro.diffSchemas",
+        "title": "Zovo Pro: Compare two Prisma schemas"
+      },
+      {
+        "command": "zovoPrismaview.zovoPro.exportErdDoc",
+        "title": "Zovo Pro: Export Mermaid ERD and dictionary"
+      },
+      {
+        "command": "zovoPrismaview.zovoTitle.auditSchema",
+        "title": "Zovo Pro: Audit Prisma schema and relations"
+      },
+      {
+        "command": "zovoPrismaview.zovoTitle.diffSchemas",
+        "title": "Zovo Pro: Compare two Prisma schemas"
+      },
+      {
+        "command": "zovoPrismaview.zovoTitle.exportErdDoc",
+        "title": "Zovo Pro: Export Mermaid ERD and dictionary"
+      },
+      {
+        "command": "zovoPrismaview.getPro",
+        "title": "Get Zovo Pro (USD 19 once, all Zovo extensions)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoPrismaview.payWithPayPal",
+        "title": "Pay for Zovo Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoPrismaview.unlockWithSponsors",
+        "title": "I already paid: unlock with GitHub Sponsors",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoPrismaview.enterLicenseKey",
+        "title": "Enter Zovo Pro license key",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoPrismaview.removeLicense",
+        "title": "Remove Zovo Pro from this editor",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoPrismaview.payByCard",
+        "title": "Pay for Zovo Pro by card (USD 19)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoPrismaview.enterKey",
+        "title": "Enter a key",
+        "category": "Zovo Pro"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "zovoPrismaview.zovoTitle.auditSchema",
+          "when": "activeCustomEditorId == 'zovo-prismaview.viewer' && config.zovoPrismaview.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoPrismaview.zovoTitle.diffSchemas",
+          "when": "activeCustomEditorId == 'zovo-prismaview.viewer' && config.zovoPrismaview.showProTools",
+          "group": "zovoPro@2"
+        },
+        {
+          "command": "zovoPrismaview.zovoTitle.exportErdDoc",
+          "when": "activeCustomEditorId == 'zovo-prismaview.viewer' && config.zovoPrismaview.showProTools",
+          "group": "zovoPro@3"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "zovoPrismaview.openWith",
+          "when": "resourceFilename =~ /^(schema\\.prisma|.*\\.prisma)$/i && !explorerResourceIsFolder",
+          "group": "navigation@9"
+        },
+        {
+          "command": "zovoPrismaview.zovoPro.auditSchema",
+          "when": "resourceFilename =~ /^(schema\\.prisma|.*\\.prisma)$/i && !explorerResourceIsFolder && config.zovoPrismaview.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoPrismaview.zovoPro.diffSchemas",
+          "when": "resourceFilename =~ /^(schema\\.prisma|.*\\.prisma)$/i && !explorerResourceIsFolder && config.zovoPrismaview.showProTools",
+          "group": "zovoPro@2"
+        },
+        {
+          "command": "zovoPrismaview.zovoPro.exportErdDoc",
+          "when": "resourceFilename =~ /^(schema\\.prisma|.*\\.prisma)$/i && !explorerResourceIsFolder && config.zovoPrismaview.showProTools",
+          "group": "zovoPro@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "zovoPrismaview.auditSchema",
+          "when": "config.zovoPrismaview.showProTools"
+        },
+        {
+          "command": "zovoPrismaview.diffSchemas",
+          "when": "config.zovoPrismaview.showProTools"
+        },
+        {
+          "command": "zovoPrismaview.exportErdDoc",
+          "when": "config.zovoPrismaview.showProTools"
+        },
+        {
+          "command": "zovoPrismaview.zovoPro.auditSchema",
+          "when": "false"
+        },
+        {
+          "command": "zovoPrismaview.zovoPro.diffSchemas",
+          "when": "false"
+        },
+        {
+          "command": "zovoPrismaview.zovoPro.exportErdDoc",
+          "when": "false"
+        },
+        {
+          "command": "zovoPrismaview.zovoTitle.auditSchema",
+          "when": "false"
+        },
+        {
+          "command": "zovoPrismaview.zovoTitle.diffSchemas",
+          "when": "false"
+        },
+        {
+          "command": "zovoPrismaview.zovoTitle.exportErdDoc",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Prisma Schema & ERD Inspector",
+      "properties": {
+        "zovoPrismaview.maxFileMB": {
+          "type": "number",
+          "default": 16,
+          "minimum": 1,
+          "maximum": 128,
+          "description": "Files up to this size open in Prisma Schema & ERD Inspector."
+        },
+        "zovoPrismaview.pageSize": {
+          "type": "number",
+          "default": 100,
+          "minimum": 20,
+          "maximum": 500,
+          "description": "Models, enums and blocks shown on one page."
+        },
+        "zovoPrismaview.showProTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Zovo Pro tools (schema audit, schema diff and Mermaid ERD export) in the Command Palette, the Explorer menu, the editor title menu and the viewer toolbar. Everything free stays visible."
+        },
+        "zovoPrismaview.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once for a store rating after 3 Prisma schema files open without an error across 2 days. Choosing No thanks never asks again. Nothing is sent anywhere."
+        },
+        "zovoPrismaview.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate, More free tools and Zovo Pro links at the bottom of the viewer. Nothing is sent anywhere."
+        },
+        "zovo.prismaview.trial.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the 7-day Zovo Pro trial button in the Pro panel."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "zovoPrismaview.start",
+        "title": "Get started with Prisma Schema & ERD Inspector",
+        "description": "Inspect schema.prisma and *.prisma files in VS Code offline.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a Prisma schema file",
+            "description": "Click any schema.prisma or *.prisma file in the Explorer, or run Open in Prisma Schema & ERD Inspector.\n[Open the sample Prisma schema file](command:zovoPrismaview.openSample)",
+            "media": {
+              "image": "images/screenshot.png",
+              "altText": "A Prisma schema file open in the inspector showing datasource, generator, models, enums, relations, indexes and static schema findings."
+            },
+            "completionEvents": [
+              "onCommand:zovoPrismaview.openSample"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node scripts/test.js",
+    "package": "npx -y @vscode/vsce@3 package --no-dependencies"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike/sponsorships?tier_id=679878"
+  }
+}
