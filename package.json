@@ -53,9 +53,6 @@
         "displayName": "Prisma Schema & ERD Inspector",
         "selector": [
           {
-            "filenamePattern": "schema.prisma"
-          },
-          {
             "filenamePattern": "*.prisma"
           }
         ],
